@@ -15,6 +15,7 @@
     })();
   </script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="site.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -258,6 +259,21 @@
 
       <div class="exp" id="projects">
         <h3 class="title" data-i18n="projects.title">Projects</h3>
+        <div class="exp_item project-featured">
+          <img class="project-hero-image" src="projects/astel/images/kiosk-boot.webp" width="1715" height="1715" alt="ASTEL touchscreen device displaying its boot logo">
+          <h4 class="item_title" data-i18n="projects.kiosk.name">Custom Touchscreen Kiosk</h4>
+          <p class="description" data-i18n="projects.astel.description">Built custom kiosk software that turns a standard touchscreen panel into a branded, configurable, and recoverable ASTEL product.</p>
+          <div class="tech-stack project-featured-tags" aria-label="Selected technologies">
+            <span class="tech-tag">Linux</span>
+            <span class="tech-tag">Chromium Kiosk</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">Bash</span>
+          </div>
+          <a href="projects/astel/" class="case-study-link">
+            <span data-i18n="projects.astel.link">Read case study</span>
+            <i data-lucide="arrow-up-right"></i>
+          </a>
+        </div>
         <div class="exp_item">
           <h4 class="item_title" data-i18n="projects.journal.name">Journal</h4>
           <p class="description" data-i18n="projects.journal.description">This is my main project at the moment - a minimalistic journaling application with AI reflections on your journals. Started as a playground for me to experiment with AI tools and their capabilities, but it turned into a full-fledged project that I use daily and keep improving.</p>
@@ -369,45 +385,6 @@
     </main>
   </div>
   <script>
-    // Loading animation
-    window.addEventListener('load', function() {
-      // Initialize Lucide Icons after DOM is loaded
-      lucide.createIcons();
-      
-      setTimeout(() => {
-        document.querySelector('.loading-overlay').style.opacity = '0';
-        setTimeout(() => {
-          document.querySelector('.loading-overlay').style.display = 'none';
-        }, 500);
-      }, 800);
-    });
-
-    // Theme Toggle Functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
-
-    const systemThemePreference = window.matchMedia('(prefers-color-scheme: light)');
-    const getSystemTheme = () => systemThemePreference.matches ? 'light' : 'dark';
-    const getSavedTheme = () => localStorage.getItem('theme');
-    const applyTheme = (theme) => html.setAttribute('data-theme', theme);
-
-    applyTheme(getSavedTheme() || getSystemTheme());
-
-    systemThemePreference.addEventListener('change', function() {
-      if (!getSavedTheme()) {
-        applyTheme(getSystemTheme());
-      }
-    });
-
-    themeToggle.addEventListener('click', function() {
-      const theme = html.getAttribute('data-theme');
-      const newTheme = theme === 'dark' ? 'light' : 'dark';
-
-      html.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
-
-    // Language Toggle Functionality
     const translations = {
       en: {
         'profile.title': 'Software Developer',
@@ -459,6 +436,9 @@
         'publications.paper1.title': 'Automated detection and segmentation of cracks in concrete surfaces using joined segmentation and classification deep neural network',
         'publications.paper1.description': "Published research paper as part of my Bachelor's thesis.",
         'projects.title': 'Projects',
+        'projects.kiosk.name': 'Custom Touchscreen Kiosk',
+        'projects.astel.description': 'Built custom kiosk software that turns a standard touchscreen panel into a branded, configurable, and recoverable ASTEL product.',
+        'projects.astel.link': 'Read case study',
         'projects.journal.name': 'Journal',
         'projects.journal.description': 'This is my main project at the moment - a minimalistic journaling application with AI reflections on your journals. Started as a playground for me to experiment with AI tools and their capabilities, but it turned into a full-fledged project that I use daily and keep improving.',
         'projects.journal.tech': 'Tech Stack',
@@ -534,6 +514,9 @@
         'publications.paper1.title': 'Avtomatizirano zaznavanje in segmentacija razpok v betonskih površinah z uporabo združene segmentacijske in klasifikacijske globoke nevronske mreže',
         'publications.paper1.description': 'Objavljena raziskovalna publikacija kot del moje diplomske naloge.',
         'projects.title': 'Projekti',
+        'projects.kiosk.name': 'Prilagojen kiosk z zaslonom na dotik',
+        'projects.astel.description': 'Izdelal prilagojeno kiosk programsko opremo, ki standardni zaslon na dotik spremeni v prepoznaven, nastavljiv in obnovljiv izdelek ASTEL.',
+        'projects.astel.link': 'Preberi študijo primera',
         'projects.journal.name': 'Journal',
         'projects.journal.description': 'To je trenutno moj glavni projekt - minimalistična aplikacija za pisanje dnevnika z refleksijami na zapiske, ki jih poganja AI. Začelo se je kot igralni projekt za eksperimentiranje z AI orodji in njihovimi možnostmi, a se je razvilo v večji projekt, ki ga dnevno uporabljam in izpopolnjujem.',
         'projects.journal.tech': 'Tech Stack',
@@ -561,37 +544,7 @@
       }
     };
 
-    const languageToggle = document.getElementById('language-toggle');
-    let currentLanguage = localStorage.getItem('language') || 'en';
-
-    // Function to update text content based on language
-    function updateLanguage(lang) {
-      currentLanguage = lang;
-      localStorage.setItem('language', lang);
-
-      // Update all elements with data-i18n attribute
-      document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          element.innerHTML = translations[lang][key];
-        }
-      });
-
-      // Update language toggle button text
-      languageToggle.querySelector('.lang-text').textContent = lang === 'en' ? 'SL' : 'EN';
-
-      // Update html lang attribute
-      document.documentElement.setAttribute('lang', lang);
-    }
-
-    // Initialize language on page load
-    updateLanguage(currentLanguage);
-
-    // Language toggle event listener
-    languageToggle.addEventListener('click', function() {
-      const newLanguage = currentLanguage === 'en' ? 'sl' : 'en';
-      updateLanguage(newLanguage);
-    });
+    window.initSite(translations);
   </script>
 </body>
 

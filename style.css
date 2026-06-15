@@ -578,6 +578,79 @@ a:hover {
     height: 1.8rem;
 }
 
+.project-featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    column-gap: 2.5rem;
+    align-items: start;
+}
+
+.project-featured > :not(.project-hero-image) {
+    grid-column: 1;
+}
+
+.project-hero-image {
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 0.8rem;
+    object-fit: cover;
+    box-shadow: 0 4px 10px var(--card-shadow);
+}
+
+.project-featured-tags {
+    margin-top: 1.5rem;
+}
+
+.case-study-link {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+    padding: 1rem 2rem;
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.case-study-link:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.case-study-link svg {
+    width: 2rem;
+    height: 2rem;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+@media only screen and (max-width: 480px) {
+    .project-featured {
+        display: block;
+    }
+
+    .project-hero-image {
+        width: 100%;
+        height: auto;
+        max-height: 28rem;
+        margin-bottom: 1.8rem;
+        object-position: center;
+    }
+}
+
 /* References */
 .ref_item {
     margin-top: 2rem;
@@ -899,10 +972,13 @@ hr {
 @media print {
     /* Hide interactive elements */
     .theme-toggle,
+    .language-toggle,
     .download_btn,
     .loading-overlay,
     .pdf-card,
-    .cli-section {
+    .cli-section,
+    .project-hero-image,
+    .case-study-link {
         display: none !important;
     }
 
