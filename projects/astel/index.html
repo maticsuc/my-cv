@@ -24,9 +24,6 @@
     <i data-lucide="sun" class="sun-icon"></i>
     <i data-lucide="moon" class="moon-icon"></i>
   </button>
-  <button id="language-toggle" class="language-toggle" aria-label="Toggle language">
-    <span class="lang-text">EN</span>
-  </button>
 
   <main class="case-study-shell fade-in">
     <nav class="case-study-nav" aria-label="Case study navigation">
@@ -232,49 +229,6 @@
         'astel.result.p2': 'Embedded Linux, frontend UI, systemd services, hardware debugging, network troubleshooting, and deployment automation — all in one project.',
         'visual.provisioning.caption': 'An on-screen keyboard keeps setup self-contained.',
         'visual.config.caption': 'Connectivity, display, branding, and device controls in one interface.'
-      },
-      sl: {
-        'nav.back': 'Nazaj na CV',
-        'nav.docs': 'Preberi dokumentacijo',
-        'nav.docsDescription': 'Nastavi, namesti, obnovi',
-        'kiosk.title': 'Prilagojen kiosk z zaslonom na dotik',
-        'astel.lead': 'Standardni Portworld zaslon na dotik spremeni v prepoznaven, nastavljiv in obnovljiv kiosk ASTEL.',
-        'astel.starting.title': 'Izhodišče',
-        'astel.starting.p1': 'Začel sem s standardnim Portworld YC-SM41P zaslonom na dotik s proizvajalčevo Debian sliko. Strojna oprema je delovala, programska pa ni bila produkcijsko pripravljena.',
-        'astel.starting.p2': 'Odstranil sem nepotrebne zagonske servise in napravo nastavil za neposreden zagon v kiosk način.',
-        'astel.starting.before': 'Prvotni zagon grafičnega sistema',
-        'astel.starting.after': 'Optimiziran zagon grafičnega sistema',
-        'astel.kiosk.title': 'Izdelava kiosk načina',
-        'astel.kiosk.p1': 'Ustvaril sem prilagojeno Linux sejo, ki zažene Chromium v celozaslonskem kiosk načinu. Pred odprtjem ciljne strani počaka na omrežno povezavo in preveri sistemsko uro — s čimer prepreči napake povezave in certifikatov ob zagonu.',
-        'astel.kiosk.p2': 'Nenavaden zaslon 480×480 je povzročil več težav s postavitvijo. Popravil sem velikost Chromium okna, skrito vsebino, vidnost kazalca in onemogočil povečavo z dotikom.',
-        'astel.setup.title': 'Izdelava nastavitvenega vmesnika',
-        'astel.setup.p1': 'Zgradil sem lokalni nastavitveni vmesnik s Flaskom, HTML, CSS in JavaScript, zasnovan za majhen kvadratni zaslon — brez zunanje tipkovnice ali računalnika.',
-        'astel.setup.item1': 'Izbira in povezava z WiFi omrežjem',
-        'astel.setup.item2': 'Nastavitev in preverjanje kiosk URL-ja',
-        'astel.setup.item3': 'Prilagoditev svetlosti zaslona',
-        'astel.setup.item4': 'Izbira zagonskega logotipa ASTEL Lighting ali ASTEL Marine',
-        'astel.setup.item5': 'Ponovni zagon ali izklop naprave',
-        'astel.hardware.title': 'Reševanje težav strojne opreme',
-        'astel.hardware.p1': 'WiFi modul je na mešanih WPA2/WPA3 omrežjih vztrajno poskušal uporabiti WPA3, kar je povzročalo dolge zakasnitve. Težavo sem odpravil z izrecnimi WPA2 profili in dodal manjši systemd servis za zakasnitev povezovanja v strojni opremi.',
-        'astel.hardware.p2': 'Spremembe so povezavo WiFi ob hladnem zagonu skrajšale s 19s na 10,5s — kiosk je viden približno deset sekund prej.',
-        'astel.hardware.before': 'Prvotna WiFi povezava pri hladnem zagonu',
-        'astel.hardware.after': 'Optimizirana WiFi povezava pri hladnem zagonu',
-        'astel.branding.title': 'Blagovna znamka in upravljanje naprave',
-        'astel.branding.p1': 'Privzeto zagonsko grafiko sem zamenjal z blagovno znamko ASTEL. Ker logotip leži v preverjeni Rockchip zagonski particiji, sem zgradil zaščiteno orodje, ki posodobi sliko in njeno kontrolno vrednost.',
-        'astel.branding.p2': 'Naprava ima en sam fizični gumb, zato sem mu dodal dve funkciji za obnovitev brez izpostavljanja Linux namizja.',
-        'astel.branding.short.title': 'Kratek pritisk',
-        'astel.branding.short.text': 'Osveži prikazano spletno stran.',
-        'astel.branding.hold.title': 'Tri sekunde dolg pritisk',
-        'astel.branding.hold.text': 'Počisti nastavitve in vrne napravo v nastavitveni način.',
-        'astel.deployment.title': 'Namestitev in obnovitev',
-        'astel.deployment.p1': 'Projekt sem začel z ročnim preizkušanjem na eni napravi. Ko se je sistem stabiliziral, sem vse prestavil v strukturiran repozitorij s ponovljivim postopkom namestitve.',
-        'astel.deployment.p2': 'Nove naprave se pripravijo prek ADB, posodobitve namestijo prek SSH. Enak postopek deluje v Linuxu in Windowsih, z varnostnimi kopijami in zaščito za kritične spremembe zagona.',
-        'astel.deployment.p3': 'Med razvojem je obnova surove slike izbrisala zagonsko verigo naprave — obnovil sem jo s pini MaskROM in uradno proizvajalčevo sliko. Končni postopek se izogne surovemu zapisovanju: najprej uradna slika, nato avtomatizirana namestitev.',
-        'astel.result.title': 'Rezultat',
-        'astel.result.p1': 'Namenski kiosk ASTEL — prepoznaven, nastavljiv, obnovljiv in preprost za namestitev.',
-        'astel.result.p2': 'Vgrajeni Linux, uporabniški vmesnik, systemd servisi, strojna oprema, omrežje in avtomatizacija namestitve — vse v enem projektu.',
-        'visual.provisioning.caption': 'Zaslonska tipkovnica omogoča samostojno nastavitev.',
-        'visual.config.caption': 'Povezljivost, prikaz, blagovna znamka in upravljanje naprave v enem vmesniku.'
       }
     };
 

@@ -35,17 +35,20 @@ assert.match(caseStudy, /src="images\/kiosk-config-keyboard\.webp"[^>]*loading="
 assert.match(caseStudy, /src="images\/kiosk-config-ui\.webp"[^>]*loading="lazy"/, 'Case study includes a lazy-loaded configuration UI image');
 assert.doesNotMatch(caseStudy, /data-i18n="visual\.(hero|provisioning|kiosk)"/, 'Replaced image placeholders are removed');
 assert.doesNotMatch(caseStudy, /visual-placeholder/, 'Case study no longer contains visual placeholders');
-assert.match(caseStudy, /const translations = \{[\s\S]*en:\s*\{[\s\S]*sl:\s*\{/, 'Case study includes English and Slovenian translations');
+assert.doesNotMatch(caseStudy, /id="language-toggle"/, 'Case study does not include a language toggle');
+assert.match(caseStudy, /const translations = \{[\s\S]*en:\s*\{/, 'Case study includes English translations');
+assert.doesNotMatch(caseStudy, /\n\s*sl:\s*\{/, 'Case study does not include Slovenian translations');
 assert.match(caseStudy, /src="\.\.\/\.\.\/site\.js"/, 'Case study uses shared preference script');
 assert.match(cv, /src="site\.js"/, 'CV uses shared preference script');
 assert.match(siteScript, /window\.initSite/, 'Shared script exposes site initializer');
 assert.match(siteScript, /prefers-color-scheme:\s*light/, 'Shared script defaults to the system theme');
+assert.match(siteScript, /const hasLanguageToggle = Boolean\(languageToggle\)/, 'Shared script keeps pages without language toggles English-only');
 assert.match(caseStudy, /prefers-color-scheme:\s*light/, 'Case study applies the system theme before rendering');
 
 const caseStudyKeys = [...caseStudy.matchAll(/data-i18n="([^"]+)"/g)].map(match => match[1]);
 for (const key of new Set(caseStudyKeys)) {
   const translationOccurrences = caseStudy.match(new RegExp(`'${key.replaceAll('.', '\\.')}'\\s*:`, 'g')) || [];
-  assert.equal(translationOccurrences.length, 2, `Case study includes English and Slovenian translations for ${key}`);
+  assert.equal(translationOccurrences.length, 1, `Case study includes one English translation for ${key}`);
 }
 
 console.log('Static validation passed.');

@@ -10,11 +10,14 @@
   window.initSite = function(translations) {
     const themeToggle = document.getElementById('theme-toggle');
     const languageToggle = document.getElementById('language-toggle');
-    let currentLanguage = localStorage.getItem('language') || 'en';
+    const hasLanguageToggle = Boolean(languageToggle);
+    let currentLanguage = hasLanguageToggle ? localStorage.getItem('language') || 'en' : 'en';
 
     function updateLanguage(lang) {
       currentLanguage = lang;
-      localStorage.setItem('language', lang);
+      if (hasLanguageToggle) {
+        localStorage.setItem('language', lang);
+      }
 
       document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
@@ -23,7 +26,7 @@
         }
       });
 
-      if (languageToggle) {
+      if (hasLanguageToggle) {
         languageToggle.querySelector('.lang-text').textContent = lang === 'en' ? 'SL' : 'EN';
       }
 
@@ -44,7 +47,7 @@
       }
     });
 
-    if (languageToggle) {
+    if (hasLanguageToggle) {
       languageToggle.addEventListener('click', function() {
         updateLanguage(currentLanguage === 'en' ? 'sl' : 'en');
       });
