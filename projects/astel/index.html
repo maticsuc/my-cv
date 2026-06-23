@@ -39,7 +39,7 @@
     <header class="case-study-hero">
       <div>
         <h1 class="case-study-title" data-i18n="kiosk.title">Custom Touchscreen Kiosk</h1>
-        <p class="case-study-lead" data-i18n="astel.lead">Custom kiosk software that turns a standard Portworld touchscreen panel into a branded, configurable, and recoverable ASTEL product.</p>
+        <p class="case-study-lead" data-i18n="astel.lead">Transforms a standard Portworld touchscreen into a branded, configurable, recoverable ASTEL kiosk.</p>
         <div class="case-study-meta" aria-label="Selected technologies">
           <span class="tech-tag">Embedded Linux</span>
           <span class="tech-tag">Chromium Kiosk</span>
@@ -47,6 +47,10 @@
           <span class="tech-tag">JavaScript</span>
           <span class="tech-tag">Bash</span>
           <span class="tech-tag">systemd</span>
+        </div>
+        <div class="case-study-docs">
+          <p class="case-study-docs-text" data-i18n="nav.docsDescription">Setup, deploy, recover</p>
+          <a href="https://astel-portworld-kiosk.vercel.app/" target="_blank" rel="noopener noreferrer" class="case-study-docs-link" data-i18n="nav.docs">Read docs</a>
         </div>
       </div>
       <img class="case-study-image case-study-image-hero" src="images/kiosk-boot.webp" width="1715" height="1715" alt="ASTEL touchscreen device displaying its boot logo">
@@ -58,8 +62,8 @@
         <h2 class="case-study-heading" id="starting-title" data-i18n="astel.starting.title">Starting point</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.starting.p1">I started with a standard Portworld YC-SM41P touchscreen panel running the manufacturer's Debian image. The hardware worked, but the system was not ready to be used as a dedicated product.</p>
-        <p data-i18n="astel.starting.p2">I removed unnecessary startup services and configured the device to launch directly into the kiosk, reducing the time needed to reach the graphical system.</p>
+        <p data-i18n="astel.starting.p1">I started with a standard Portworld YC-SM41P touchscreen running the manufacturer's Debian image. The hardware worked, but the software wasn't production-ready.</p>
+        <p data-i18n="astel.starting.p2">I removed unnecessary startup services and configured the device to boot straight into kiosk mode.</p>
         <div class="metric-grid">
           <div class="metric-card">
             <span class="metric-value">6.1s</span>
@@ -79,8 +83,8 @@
         <h2 class="case-study-heading" id="kiosk-title" data-i18n="astel.kiosk.title">Building the kiosk mode</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.kiosk.p1">I created a custom Linux session that automatically launches Chromium in fullscreen kiosk mode. Before opening the configured website, the session waits for a network connection and verifies that the system clock is valid, preventing connection and certificate errors during startup.</p>
-        <p data-i18n="astel.kiosk.p2">The unusual 480×480 display introduced several layout problems. I fixed incorrectly sized Chromium windows, hidden content, cursor visibility, and unwanted touchscreen pinch-to-zoom.</p>
+        <p data-i18n="astel.kiosk.p1">I created a custom Linux session that launches Chromium in fullscreen kiosk mode. Before opening the target page, it waits for a network connection and validates the system clock — preventing connection and certificate errors at startup.</p>
+        <p data-i18n="astel.kiosk.p2">The unusual 480×480 display caused several layout problems. I fixed Chromium's window size, hidden content, cursor visibility, and disabled pinch-to-zoom.</p>
       </div>
     </section>
 
@@ -90,7 +94,7 @@
         <h2 class="case-study-heading" id="setup-title" data-i18n="astel.setup.title">Creating the setup interface</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.setup.p1">To make installation and configuration simple, I built a local setup interface using Flask, HTML, CSS, and JavaScript. It is designed specifically for the small square touchscreen and works without an external keyboard or computer.</p>
+        <p data-i18n="astel.setup.p1">I built a local setup interface using Flask, HTML, CSS, and JavaScript, designed for the small square touchscreen — no external keyboard or computer needed.</p>
         <ul class="case-study-list">
           <li data-i18n="astel.setup.item1">Select and connect to a WiFi network</li>
           <li data-i18n="astel.setup.item2">Configure and test the kiosk URL</li>
@@ -117,8 +121,8 @@
         <h2 class="case-study-heading" id="hardware-title" data-i18n="astel.hardware.title">Solving hardware-specific problems</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.hardware.p1">The WiFi module regularly attempted to use WPA3 on mixed WPA2/WPA3 networks, causing long connection timeouts. I fixed this with explicit WPA2 profiles and added a small system service to work around a separate firmware association delay.</p>
-        <p data-i18n="astel.hardware.p2">Together, these changes reduced cold-boot WiFi connection time and made the complete kiosk visible roughly ten seconds sooner than at the start of the project.</p>
+        <p data-i18n="astel.hardware.p1">The WiFi module kept trying WPA3 on mixed WPA2/WPA3 networks, triggering long timeouts. I fixed this with explicit WPA2 profiles and a small systemd service to work around a firmware association delay.</p>
+        <p data-i18n="astel.hardware.p2">These changes dropped cold-boot WiFi from 19s to 10.5s — the kiosk appears roughly ten seconds sooner.</p>
         <div class="metric-grid">
           <div class="metric-card">
             <span class="metric-value">19s</span>
@@ -138,8 +142,8 @@
         <h2 class="case-study-heading" id="branding-title" data-i18n="astel.branding.title">Branding and device controls</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.branding.p1">I replaced the default boot graphics with ASTEL branding. Because the logo is stored inside a verified Rockchip boot partition, I created a guarded flashing tool that safely updates both the image and its integrity hash.</p>
-        <p data-i18n="astel.branding.p2">The panel has one accessible hardware button, so I gave it two deliberate recovery functions without exposing the Linux desktop.</p>
+        <p data-i18n="astel.branding.p1">I replaced the default boot graphics with ASTEL branding. Since the logo lives in a verified Rockchip boot partition, I built a guarded flashing tool that updates both the image and its integrity hash.</p>
+        <p data-i18n="astel.branding.p2">The panel has a single hardware button, so I gave it two recovery functions without exposing the Linux desktop.</p>
         <div class="decision-grid">
           <article class="decision-card">
             <h3 data-i18n="astel.branding.short.title">Short press</h3>
@@ -159,9 +163,9 @@
         <h2 class="case-study-heading" id="deployment-title" data-i18n="astel.deployment.title">Deployment and recovery</h2>
       </div>
       <div class="case-study-copy">
-        <p data-i18n="astel.deployment.p1">The project began with manual testing on one device. As it stabilized, I moved the configuration, scripts, services, and interface into a structured repository and created a repeatable deployment process.</p>
-        <p data-i18n="astel.deployment.p2">Fresh devices can be prepared over ADB, while later updates deploy over SSH. The same process works from Linux and Windows and includes backups and checks for boot-critical changes.</p>
-        <p data-i18n="astel.deployment.p3">During development, raw image restoration erased the device's boot chain. I recovered it using the board's MaskROM pins and the manufacturer's official image. The final process therefore uses the official image followed by automated deployment instead of unsafe raw image flashing.</p>
+        <p data-i18n="astel.deployment.p1">I started with manual testing on one device. As it stabilized, I moved everything into a structured repo with a repeatable deployment process.</p>
+        <p data-i18n="astel.deployment.p2">Fresh devices provision over ADB; updates deploy over SSH. The same process works on Linux and Windows, with backups and guards for boot-critical changes.</p>
+        <p data-i18n="astel.deployment.p3">During development, raw image restoration wiped the device's boot chain — I recovered it using the board's MaskROM pins and the manufacturer's official image. The final process avoids raw flashing entirely: official image first, then automated deployment.</p>
       </div>
     </section>
 
@@ -171,8 +175,8 @@
         <h2 class="case-study-heading" id="result-title" data-i18n="astel.result.title">Result</h2>
       </div>
       <div class="case-study-copy">
-        <p class="result-lead" data-i18n="astel.result.p1">The finished system turns a standard touchscreen panel into a dedicated ASTEL kiosk that is branded, configurable, recoverable, and straightforward to deploy.</p>
-        <p data-i18n="astel.result.p2">The project combined embedded Linux configuration, frontend development, systemd services, hardware debugging, network troubleshooting, and deployment automation.</p>
+        <p class="result-lead" data-i18n="astel.result.p1">A dedicated ASTEL kiosk — branded, configurable, recoverable, and straightforward to deploy.</p>
+        <p data-i18n="astel.result.p2">Embedded Linux, frontend UI, systemd services, hardware debugging, network troubleshooting, and deployment automation — all in one project.</p>
       </div>
     </section>
 
@@ -188,83 +192,87 @@
     const translations = {
       en: {
         'nav.back': 'Back to CV',
+        'nav.docs': 'Read docs',
+        'nav.docsDescription': 'Setup, deploy, recover',
         'kiosk.title': 'Custom Touchscreen Kiosk',
-        'astel.lead': 'Custom kiosk software that turns a standard Portworld touchscreen panel into a branded, configurable, and recoverable ASTEL product.',
+        'astel.lead': 'Transforms a standard Portworld touchscreen into a branded, configurable, recoverable ASTEL kiosk.',
         'astel.starting.title': 'Starting point',
-        'astel.starting.p1': "I started with a standard Portworld YC-SM41P touchscreen panel running the manufacturer's Debian image. The hardware worked, but the system was not ready to be used as a dedicated product.",
-        'astel.starting.p2': 'I removed unnecessary startup services and configured the device to launch directly into the kiosk, reducing the time needed to reach the graphical system.',
+        'astel.starting.p1': "I started with a standard Portworld YC-SM41P touchscreen running the manufacturer's Debian image. The hardware worked, but the software wasn't production-ready.",
+        'astel.starting.p2': 'I removed unnecessary startup services and configured the device to boot straight into kiosk mode.',
         'astel.starting.before': 'Original graphical startup',
         'astel.starting.after': 'Optimized graphical startup',
         'astel.kiosk.title': 'Building the kiosk mode',
-        'astel.kiosk.p1': 'I created a custom Linux session that automatically launches Chromium in fullscreen kiosk mode. Before opening the configured website, the session waits for a network connection and verifies that the system clock is valid, preventing connection and certificate errors during startup.',
-        'astel.kiosk.p2': 'The unusual 480×480 display introduced several layout problems. I fixed incorrectly sized Chromium windows, hidden content, cursor visibility, and unwanted touchscreen pinch-to-zoom.',
+        'astel.kiosk.p1': 'I created a custom Linux session that launches Chromium in fullscreen kiosk mode. Before opening the target page, it waits for a network connection and validates the system clock — preventing connection and certificate errors at startup.',
+        'astel.kiosk.p2': 'The unusual 480×480 display caused several layout problems. I fixed Chromium\'s window size, hidden content, cursor visibility, and disabled pinch-to-zoom.',
         'astel.setup.title': 'Creating the setup interface',
-        'astel.setup.p1': 'To make installation and configuration simple, I built a local setup interface using Flask, HTML, CSS, and JavaScript. It is designed specifically for the small square touchscreen and works without an external keyboard or computer.',
+        'astel.setup.p1': 'I built a local setup interface using Flask, HTML, CSS, and JavaScript, designed for the small square touchscreen — no external keyboard or computer needed.',
         'astel.setup.item1': 'Select and connect to a WiFi network',
         'astel.setup.item2': 'Configure and test the kiosk URL',
         'astel.setup.item3': 'Adjust screen brightness',
         'astel.setup.item4': 'Select an ASTEL Lighting or ASTEL Marine boot logo',
         'astel.setup.item5': 'Reboot or shut down the device',
         'astel.hardware.title': 'Solving hardware-specific problems',
-        'astel.hardware.p1': 'The WiFi module regularly attempted to use WPA3 on mixed WPA2/WPA3 networks, causing long connection timeouts. I fixed this with explicit WPA2 profiles and added a small system service to work around a separate firmware association delay.',
-        'astel.hardware.p2': 'Together, these changes reduced cold-boot WiFi connection time and made the complete kiosk visible roughly ten seconds sooner than at the start of the project.',
+        'astel.hardware.p1': 'The WiFi module kept trying WPA3 on mixed WPA2/WPA3 networks, triggering long timeouts. I fixed this with explicit WPA2 profiles and a small systemd service to work around a firmware association delay.',
+        'astel.hardware.p2': 'These changes dropped cold-boot WiFi from 19s to 10.5s — the kiosk appears roughly ten seconds sooner.',
         'astel.hardware.before': 'Original cold-boot WiFi',
         'astel.hardware.after': 'Optimized cold-boot WiFi',
         'astel.branding.title': 'Branding and device controls',
-        'astel.branding.p1': 'I replaced the default boot graphics with ASTEL branding. Because the logo is stored inside a verified Rockchip boot partition, I created a guarded flashing tool that safely updates both the image and its integrity hash.',
-        'astel.branding.p2': 'The panel has one accessible hardware button, so I gave it two deliberate recovery functions without exposing the Linux desktop.',
+        'astel.branding.p1': 'I replaced the default boot graphics with ASTEL branding. Since the logo lives in a verified Rockchip boot partition, I built a guarded flashing tool that updates both the image and its integrity hash.',
+        'astel.branding.p2': 'The panel has a single hardware button, so I gave it two recovery functions without exposing the Linux desktop.',
         'astel.branding.short.title': 'Short press',
         'astel.branding.short.text': 'Refreshes the displayed web page.',
         'astel.branding.hold.title': 'Three-second hold',
         'astel.branding.hold.text': 'Clears settings and returns the device to setup mode.',
         'astel.deployment.title': 'Deployment and recovery',
-        'astel.deployment.p1': 'The project began with manual testing on one device. As it stabilized, I moved the configuration, scripts, services, and interface into a structured repository and created a repeatable deployment process.',
-        'astel.deployment.p2': 'Fresh devices can be prepared over ADB, while later updates deploy over SSH. The same process works from Linux and Windows and includes backups and checks for boot-critical changes.',
-        'astel.deployment.p3': "During development, raw image restoration erased the device's boot chain. I recovered it using the board's MaskROM pins and the manufacturer's official image. The final process therefore uses the official image followed by automated deployment instead of unsafe raw image flashing.",
+        'astel.deployment.p1': 'I started with manual testing on one device. As it stabilized, I moved everything into a structured repo with a repeatable deployment process.',
+        'astel.deployment.p2': 'Fresh devices provision over ADB; updates deploy over SSH. The same process works on Linux and Windows, with backups and guards for boot-critical changes.',
+        'astel.deployment.p3': 'During development, raw image restoration wiped the device\'s boot chain — I recovered it using the board\'s MaskROM pins and the manufacturer\'s official image. The final process avoids raw flashing entirely: official image first, then automated deployment.',
         'astel.result.title': 'Result',
-        'astel.result.p1': 'The finished system turns a standard touchscreen panel into a dedicated ASTEL kiosk that is branded, configurable, recoverable, and straightforward to deploy.',
-        'astel.result.p2': 'The project combined embedded Linux configuration, frontend development, systemd services, hardware debugging, network troubleshooting, and deployment automation.',
+        'astel.result.p1': 'A dedicated ASTEL kiosk — branded, configurable, recoverable, and straightforward to deploy.',
+        'astel.result.p2': 'Embedded Linux, frontend UI, systemd services, hardware debugging, network troubleshooting, and deployment automation — all in one project.',
         'visual.provisioning.caption': 'An on-screen keyboard keeps setup self-contained.',
         'visual.config.caption': 'Connectivity, display, branding, and device controls in one interface.'
       },
       sl: {
         'nav.back': 'Nazaj na CV',
+        'nav.docs': 'Preberi dokumentacijo',
+        'nav.docsDescription': 'Nastavi, namesti, obnovi',
         'kiosk.title': 'Prilagojen kiosk z zaslonom na dotik',
-        'astel.lead': 'Prilagojena kiosk programska oprema, ki standardni Portworld zaslon na dotik spremeni v prepoznaven, nastavljiv in obnovljiv izdelek ASTEL.',
+        'astel.lead': 'Standardni Portworld zaslon na dotik spremeni v prepoznaven, nastavljiv in obnovljiv kiosk ASTEL.',
         'astel.starting.title': 'Izhodišče',
-        'astel.starting.p1': 'Začel sem s standardnim zaslonom na dotik Portworld YC-SM41P, ki je uporabljal proizvajalčevo Debian sliko. Strojna oprema je delovala, vendar sistem še ni bil pripravljen za uporabo kot namenski izdelek.',
-        'astel.starting.p2': 'Odstranil sem nepotrebne zagonske servise in napravo nastavil tako, da se zažene neposredno v kiosk, s čimer sem skrajšal čas do grafičnega sistema.',
+        'astel.starting.p1': 'Začel sem s standardnim Portworld YC-SM41P zaslonom na dotik s proizvajalčevo Debian sliko. Strojna oprema je delovala, programska pa ni bila produkcijsko pripravljena.',
+        'astel.starting.p2': 'Odstranil sem nepotrebne zagonske servise in napravo nastavil za neposreden zagon v kiosk način.',
         'astel.starting.before': 'Prvotni zagon grafičnega sistema',
         'astel.starting.after': 'Optimiziran zagon grafičnega sistema',
         'astel.kiosk.title': 'Izdelava kiosk načina',
-        'astel.kiosk.p1': 'Ustvaril sem prilagojeno Linux sejo, ki samodejno zažene Chromium v celozaslonskem kiosk načinu. Pred odpiranjem nastavljene strani seja počaka na omrežno povezavo in preveri veljavnost sistemske ure, kar prepreči napake povezave in certifikatov med zagonom.',
-        'astel.kiosk.p2': 'Nenavaden zaslon velikosti 480×480 je povzročil več težav s postavitvijo. Odpravil sem nepravilno velikost Chromium okna, skrito vsebino, vidnost kazalca in neželeno povečavo z dotikom.',
+        'astel.kiosk.p1': 'Ustvaril sem prilagojeno Linux sejo, ki zažene Chromium v celozaslonskem kiosk načinu. Pred odprtjem ciljne strani počaka na omrežno povezavo in preveri sistemsko uro — s čimer prepreči napake povezave in certifikatov ob zagonu.',
+        'astel.kiosk.p2': 'Nenavaden zaslon 480×480 je povzročil več težav s postavitvijo. Popravil sem velikost Chromium okna, skrito vsebino, vidnost kazalca in onemogočil povečavo z dotikom.',
         'astel.setup.title': 'Izdelava nastavitvenega vmesnika',
-        'astel.setup.p1': 'Za preprosto namestitev in konfiguracijo sem zgradil lokalni nastavitveni vmesnik s Flaskom, HTML-jem, CSS-jem in JavaScriptom. Zasnovan je posebej za majhen kvadratni zaslon in deluje brez zunanje tipkovnice ali računalnika.',
+        'astel.setup.p1': 'Zgradil sem lokalni nastavitveni vmesnik s Flaskom, HTML, CSS in JavaScript, zasnovan za majhen kvadratni zaslon — brez zunanje tipkovnice ali računalnika.',
         'astel.setup.item1': 'Izbira in povezava z WiFi omrežjem',
         'astel.setup.item2': 'Nastavitev in preverjanje kiosk URL-ja',
         'astel.setup.item3': 'Prilagoditev svetlosti zaslona',
         'astel.setup.item4': 'Izbira zagonskega logotipa ASTEL Lighting ali ASTEL Marine',
         'astel.setup.item5': 'Ponovni zagon ali izklop naprave',
         'astel.hardware.title': 'Reševanje težav strojne opreme',
-        'astel.hardware.p1': 'WiFi modul je na mešanih WPA2/WPA3 omrežjih redno poskušal uporabiti WPA3, kar je povzročalo dolge zakasnitve povezovanja. Težavo sem odpravil z izrecnimi WPA2 profili in dodal manjši sistemski servis za ločeno zakasnitev povezovanja v strojni programski opremi.',
-        'astel.hardware.p2': 'Spremembe so skrajšale čas povezave WiFi pri hladnem zagonu in omogočile prikaz celotnega kioska približno deset sekund prej kot na začetku projekta.',
+        'astel.hardware.p1': 'WiFi modul je na mešanih WPA2/WPA3 omrežjih vztrajno poskušal uporabiti WPA3, kar je povzročalo dolge zakasnitve. Težavo sem odpravil z izrecnimi WPA2 profili in dodal manjši systemd servis za zakasnitev povezovanja v strojni opremi.',
+        'astel.hardware.p2': 'Spremembe so povezavo WiFi ob hladnem zagonu skrajšale s 19s na 10,5s — kiosk je viden približno deset sekund prej.',
         'astel.hardware.before': 'Prvotna WiFi povezava pri hladnem zagonu',
         'astel.hardware.after': 'Optimizirana WiFi povezava pri hladnem zagonu',
         'astel.branding.title': 'Blagovna znamka in upravljanje naprave',
-        'astel.branding.p1': 'Privzeto zagonsko grafiko sem zamenjal z blagovno znamko ASTEL. Ker je logotip shranjen v preverjeni zagonski particiji Rockchip, sem ustvaril zaščiteno orodje, ki varno posodobi sliko in njeno kontrolno vrednost.',
-        'astel.branding.p2': 'Naprava ima en dostopen fizični gumb, zato sem mu dodal dve premišljeni funkciji za obnovitev brez izpostavljanja Linux namizja.',
+        'astel.branding.p1': 'Privzeto zagonsko grafiko sem zamenjal z blagovno znamko ASTEL. Ker logotip leži v preverjeni Rockchip zagonski particiji, sem zgradil zaščiteno orodje, ki posodobi sliko in njeno kontrolno vrednost.',
+        'astel.branding.p2': 'Naprava ima en sam fizični gumb, zato sem mu dodal dve funkciji za obnovitev brez izpostavljanja Linux namizja.',
         'astel.branding.short.title': 'Kratek pritisk',
         'astel.branding.short.text': 'Osveži prikazano spletno stran.',
         'astel.branding.hold.title': 'Tri sekunde dolg pritisk',
         'astel.branding.hold.text': 'Počisti nastavitve in vrne napravo v nastavitveni način.',
         'astel.deployment.title': 'Namestitev in obnovitev',
-        'astel.deployment.p1': 'Projekt se je začel z ročnim preizkušanjem na eni napravi. Ko se je sistem stabiliziral, sem konfiguracijo, skripte, servise in vmesnik prestavil v strukturiran repozitorij ter ustvaril ponovljiv postopek namestitve.',
-        'astel.deployment.p2': 'Nove naprave je mogoče pripraviti prek ADB, poznejše posodobitve pa namestiti prek SSH. Enak postopek deluje v Linuxu in Windowsih ter vključuje varnostne kopije in preverjanja kritičnih sprememb zagona.',
-        'astel.deployment.p3': 'Med razvojem je obnova surove slike izbrisala zagonsko verigo naprave. Obnovil sem jo s pini MaskROM in uradno proizvajalčevo sliko. Končni postopek zato uporablja uradno sliko, ki ji sledi avtomatizirana namestitev, namesto nevarnega neposrednega zapisovanja slike.',
+        'astel.deployment.p1': 'Projekt sem začel z ročnim preizkušanjem na eni napravi. Ko se je sistem stabiliziral, sem vse prestavil v strukturiran repozitorij s ponovljivim postopkom namestitve.',
+        'astel.deployment.p2': 'Nove naprave se pripravijo prek ADB, posodobitve namestijo prek SSH. Enak postopek deluje v Linuxu in Windowsih, z varnostnimi kopijami in zaščito za kritične spremembe zagona.',
+        'astel.deployment.p3': 'Med razvojem je obnova surove slike izbrisala zagonsko verigo naprave — obnovil sem jo s pini MaskROM in uradno proizvajalčevo sliko. Končni postopek se izogne surovemu zapisovanju: najprej uradna slika, nato avtomatizirana namestitev.',
         'astel.result.title': 'Rezultat',
-        'astel.result.p1': 'Končni sistem standardni zaslon na dotik spremeni v namenski kiosk ASTEL, ki je prepoznaven, nastavljiv, obnovljiv in preprost za namestitev.',
-        'astel.result.p2': 'Projekt je združil konfiguracijo vgrajenega Linuxa, razvoj uporabniškega vmesnika, systemd servise, odpravljanje težav strojne opreme in omrežja ter avtomatizacijo namestitve.',
+        'astel.result.p1': 'Namenski kiosk ASTEL — prepoznaven, nastavljiv, obnovljiv in preprost za namestitev.',
+        'astel.result.p2': 'Vgrajeni Linux, uporabniški vmesnik, systemd servisi, strojna oprema, omrežje in avtomatizacija namestitve — vse v enem projektu.',
         'visual.provisioning.caption': 'Zaslonska tipkovnica omogoča samostojno nastavitev.',
         'visual.config.caption': 'Povezljivost, prikaz, blagovna znamka in upravljanje naprave v enem vmesniku.'
       }
