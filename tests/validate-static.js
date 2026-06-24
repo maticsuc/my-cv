@@ -11,6 +11,7 @@ const caseStudy = read('projects/astel/index.html');
 const siteScript = read('site.js');
 
 assert.match(cv, /href="projects\/astel\/"/, 'CV links to the ASTEL case study');
+assert.match(cv, /<div class="profile-controls">[\s\S]*id="theme-toggle"[\s\S]*id="language-toggle"[\s\S]*<div class="profile_container">/, 'CV places theme and language controls inside the profile card before profile content');
 assert.match(cv, /projects\.kiosk\.name/, 'CV uses a translated company-neutral project title');
 assert.match(cv, /projects\.astel\.description/, 'CV includes translated ASTEL teaser copy');
 assert.match(cv, /src="projects\/astel\/images\/kiosk-boot\.webp"/, 'CV includes the ASTEL device hero image');
@@ -44,6 +45,14 @@ assert.match(siteScript, /window\.initSite/, 'Shared script exposes site initial
 assert.match(siteScript, /prefers-color-scheme:\s*light/, 'Shared script defaults to the system theme');
 assert.match(siteScript, /const hasLanguageToggle = Boolean\(languageToggle\)/, 'Shared script keeps pages without language toggles English-only');
 assert.match(caseStudy, /prefers-color-scheme:\s*light/, 'Case study applies the system theme before rendering');
+assert.doesNotMatch(cvStyles, /\.(theme-toggle|language-toggle)\s*\{[^}]*position:\s*fixed/, 'Profile controls are positioned relative to the profile card, not the viewport');
+assert.match(cvStyles, /\.profile\s*\{[\s\S]*position:\s*relative/, 'Profile card establishes the positioning context for controls');
+assert.match(cvStyles, /\.profile-controls\s*\{[\s\S]*position:\s*absolute/, 'Profile controls sit inside the profile card corner');
+assert.doesNotMatch(cvStyles, /\.theme-toggle\.is-switching\s+svg\s*\{[\s\S]*animation:\s*themeIconSwitch/, 'Theme click animation stays off icon transforms to avoid end-of-animation snapping');
+assert.match(cvStyles, /\.theme-toggle\.is-switching\s*\{[\s\S]*animation:\s*themeControlSwitch/, 'Theme click animation runs on the control wrapper');
+assert.match(cvStyles, /\.language-toggle\.is-switching\s*\{[\s\S]*animation:\s*themeControlSwitch/, 'Language click animation matches the theme control wrapper animation');
+assert.doesNotMatch(cvStyles, /@keyframes languageTicker|\.language-toggle\.is-switching\s+\.lang-text/, 'Language toggle does not use a separate text ticker animation');
+assert.match(cvStyles, /@media only screen and \(max-width: 768px\)[\s\S]*\.theme-toggle svg\s*\{[^}]*width:\s*2rem;[^}]*height:\s*2rem;/, 'Mobile theme icon is slightly smaller than desktop to match language control weight');
 
 const caseStudyKeys = [...caseStudy.matchAll(/data-i18n="([^"]+)"/g)].map(match => match[1]);
 for (const key of new Set(caseStudyKeys)) {

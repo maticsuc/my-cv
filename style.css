@@ -198,6 +198,7 @@ a:hover {
     border-radius: 1.2rem;
     padding: 3rem;
     box-shadow: 0 4px 6px var(--card-shadow);
+    position: relative;
     transition: all 0.3s ease;
 }
 
@@ -847,39 +848,64 @@ hr {
 }
 
 /* Theme Toggle Button */
-.theme-toggle {
-    position: fixed;
+.profile-controls {
+    position: absolute;
     top: 2rem;
     right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    z-index: 5;
+}
+
+.theme-toggle {
     width: 4rem;
     height: 4rem;
-    border-radius: 1.2rem;
-    background-color: var(--primary-color);
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1000;
+    color: var(--secondary-color);
+    --control-scale: 1;
+    transform: scale(var(--control-scale));
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    color: var(--primary-color);
+    --control-scale: 1.08;
+}
+
+.theme-toggle:focus-visible,
+.language-toggle:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 0.4rem;
 }
 
 .theme-toggle svg {
-    width: 2rem;
-    height: 2rem;
-    color: white;
-    transition: all 0.3s ease;
+    width: 2.3rem;
+    height: 2.3rem;
+    stroke-width: 1.9;
+    color: currentColor;
+    transition: opacity 0.3s ease, transform 0.3s ease, stroke-width 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+    stroke-width: 2.4;
+}
+
+.theme-toggle.is-switching {
+    animation: themeControlSwitch 0.32s ease;
 }
 
 [data-theme="dark"] .sun-icon {
     opacity: 0;
-    transform: rotate(180deg) scale(0);
+    transform: rotate(140deg) scale(0.5);
     position: absolute;
 }
 
@@ -895,56 +921,84 @@ hr {
 
 [data-theme="light"] .moon-icon {
     opacity: 0;
-    transform: rotate(-180deg) scale(0);
+    transform: rotate(-140deg) scale(0.5);
     position: absolute;
 }
 
+@keyframes themeControlSwitch {
+    0% {
+        transform: scale(var(--control-scale));
+    }
+    50% {
+        transform: scale(0.88);
+    }
+    100% {
+        transform: scale(var(--control-scale));
+    }
+}
+
 @media only screen and (max-width: 768px) {
-    .theme-toggle {
+    .profile-controls {
         top: 1.5rem;
         right: 1.5rem;
+        gap: 1rem;
+    }
+
+    .theme-toggle {
         width: 3.5rem;
         height: 3.5rem;
+    }
+
+    .theme-toggle svg {
+        width: 2rem;
+        height: 2rem;
     }
 }
 
 /* Language Toggle Button */
 .language-toggle {
-    position: fixed;
-    top: 7rem;
-    right: 2rem;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 1.2rem;
-    background-color: var(--primary-color);
+    min-width: 4rem;
+    height: 3rem;
+    padding: 0;
+    overflow: hidden;
+    background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    z-index: 1000;
+    color: var(--secondary-color);
+    --control-scale: 1;
+    transform: scale(var(--control-scale));
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .language-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    color: var(--primary-color);
+    --control-scale: 1.06;
 }
 
 .language-toggle .lang-text {
     font-size: 1.4rem;
     font-weight: 700;
-    color: white;
-    letter-spacing: 0.05em;
+    line-height: 1;
+    color: currentColor;
+    letter-spacing: 0;
+    transition: transform 0.3s ease, font-weight 0.3s ease;
+}
+
+.language-toggle:hover .lang-text {
+    font-weight: 800;
+}
+
+.language-toggle.is-switching {
+    animation: themeControlSwitch 0.32s ease;
 }
 
 @media only screen and (max-width: 768px) {
     .language-toggle {
-        top: 6rem;
-        right: 1.5rem;
-        width: 3.5rem;
-        height: 3.5rem;
+        min-width: 3.5rem;
+        height: 2.8rem;
     }
 
     .language-toggle .lang-text {

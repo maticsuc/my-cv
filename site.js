@@ -36,8 +36,15 @@
     if (themeToggle) {
       themeToggle.addEventListener('click', function() {
         const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        themeToggle.classList.remove('is-switching');
+        void themeToggle.offsetWidth;
+        themeToggle.classList.add('is-switching');
         applyTheme(newTheme);
         localStorage.setItem('theme', newTheme);
+      });
+
+      themeToggle.addEventListener('animationend', function() {
+        themeToggle.classList.remove('is-switching');
       });
     }
 
@@ -49,7 +56,14 @@
 
     if (hasLanguageToggle) {
       languageToggle.addEventListener('click', function() {
+        languageToggle.classList.remove('is-switching');
+        void languageToggle.offsetWidth;
+        languageToggle.classList.add('is-switching');
         updateLanguage(currentLanguage === 'en' ? 'sl' : 'en');
+      });
+
+      languageToggle.addEventListener('animationend', function() {
+        languageToggle.classList.remove('is-switching');
       });
     }
 

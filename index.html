@@ -20,17 +20,6 @@
 </head>
 
 <body>
-  <!-- Theme Toggle Button -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-    <i data-lucide="sun" class="sun-icon"></i>
-    <i data-lucide="moon" class="moon-icon"></i>
-  </button>
-
-  <!-- Language Toggle Button -->
-  <button id="language-toggle" class="language-toggle" aria-label="Toggle language">
-    <span class="lang-text">EN</span>
-  </button>
-
   <!-- Loading Spinner -->
   <div class="loading-overlay">
     <div class="spinner"></div>
@@ -38,6 +27,15 @@
 
   <div class="container fade-in">
     <div class="profile">
+      <div class="profile-controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+        <button id="language-toggle" class="language-toggle" aria-label="Toggle language">
+          <span class="lang-text">EN</span>
+        </button>
+      </div>
       <div class="profile_container">
         <div class="profile_profileImg">
           <img src="profile_picture.JPG" alt="Matic Šuc">
